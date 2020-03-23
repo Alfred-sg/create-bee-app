@@ -1,0 +1,54 @@
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0; 
+
+  .aside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 256px;
+    background-color: #FFFFFF;
+    min-height: 1000px;
+    border-right: 0.5px solid #eee;
+    
+    .logo {
+      padding-left: 40px;
+      height: 80px;
+      box-shadow: 0 1px 9px -3px rgba(0, 0, 0, .2);
+      line-height: 80px;
+    }
+
+    .menu {
+      margin-top: 0.5px;
+    }
+  }
+
+  .main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    
+    .header{
+      margin: 0 ;
+      padding: 0; 
+    }
+
+    .content{
+      position: relative;
+      background: #F5F7F9;
+
+      .bread{
+        padding-top: 10px;
+        padding-left:20px ;
+      }
+
+      .maincontent{
+        min-height: 500px;
+        padding: 20px;
+      }
+    }
+  }
+}

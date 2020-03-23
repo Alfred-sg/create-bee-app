@@ -1,0 +1,61 @@
+ .header {
+   background-color: #FFFFFF;
+   height: 80px;
+   line-height: 80px;
+   padding: 0 20px;
+
+   .menu_collapse_icon {
+     cursor: pointer;
+     vertical-align: middle;
+   }
+
+   .pannel {
+     position: relative;
+     float: right;
+     cursor: pointer;
+     
+     .notification {
+       vertical-align: middle;
+     }
+
+     .avatar {
+       margin-left: 20px;
+     }
+
+     .username {
+       margin-left: 10px;
+       margin-right: 20px;
+     }
+   }
+
+   .settings {
+     position: absolute;
+     z-index: 999;
+     top: 85px;
+     right: 40px;
+     width: 150px;
+     cursor: pointer;
+     background: #FFFFFF;
+     box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, .05);
+     border-radius: 4px;
+     padding: 10px;
+
+     .setting_item {
+       line-height: 2;
+
+       span {
+         margin-left: 10px;
+       }
+     }
+
+    .loginout{
+      margin-top: 10px;
+      border-top:0.5px solid #eee ;
+      line-height: 2;
+   
+      span {
+        margin-left: 10px;
+      }
+    }
+   }
+ }
