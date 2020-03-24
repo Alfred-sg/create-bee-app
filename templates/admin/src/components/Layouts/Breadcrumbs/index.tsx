@@ -3,7 +3,7 @@ import { Breadcrumb, Icon } from 'antd';
 import { useAppContext } from '@/hooks/global/app';
 import { withRouter, router } from 'umi';
 import { Route } from '@/types/global';
-import { matchLength, getMatchedRoutes } from '../utils';
+import { getMatchedRoutes } from '../utils';
 import styles from './index.scss';
 
 /**

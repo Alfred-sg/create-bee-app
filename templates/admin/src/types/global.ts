@@ -31,3 +31,30 @@ export type UserInfo = {
   authes?: string[];// 包含的权限
   [key: string]: any;
 };
+
+/**
+ * 响应
+ */
+export interface Response {
+  code: number;
+  data: any;
+  success: boolean;
+  errorMessage?: string;
+};
+
+/**
+ * 分页响应
+ */
+export interface PageData {
+  list: any[];
+  total: number;
+  pageSize: number;
+  current: number;
+};
+
+/**
+ * 分页响应
+ */
+export interface PageResponse extends Response {
+  data: PageData;
+};

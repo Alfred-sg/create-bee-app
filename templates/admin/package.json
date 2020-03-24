@@ -8,7 +8,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "antd": "^4.0.4",
     "chaos-hooks": "^0.3.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

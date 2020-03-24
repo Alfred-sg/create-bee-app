@@ -8,8 +8,12 @@ import { IS_DEV, ENV_TEXT, GIT_BRANCH_NAME, GIT_COMMIT_HASH, GIT_COMMIT_MESSAGE 
 export default () => {
   const message = (
     <div>
-      <div>当前环境：{ENV_TEXT}；提交分支：{GIT_BRANCH_NAME}；提交Hash：{GIT_COMMIT_HASH}</div>
-      <div>提交信息：{GIT_COMMIT_MESSAGE}</div>
+      <div>
+        <span>当前环境：{ENV_TEXT}；</span>
+        {GIT_BRANCH_NAME && <span>提交分支：{GIT_BRANCH_NAME}；</span>}
+        {GIT_BRANCH_NAME && <span>提交Hash：{GIT_COMMIT_HASH}；</span>}
+      </div>
+      {GIT_COMMIT_MESSAGE && <div>提交信息：{GIT_COMMIT_MESSAGE}</div>}
     </div>
   );
 

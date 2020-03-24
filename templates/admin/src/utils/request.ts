@@ -1,124 +1,119 @@
-import axios from 'axios';
-import { message as antdMessage } from 'antd';
-import { getCache, setCache } from './cache';
-import { URL_PREFIX } from '../config';
+import { router } from 'umi';
+import { message } from 'antd';
+import { extend, RequestOptionsInit } from 'umi-request';
+import { URL_PREFIX, IS_LOCAL } from '../config';
 
-type Method = 'get' | 'post' | 'put' | 'delete';
+const request = extend({
+  prefix: URL_PREFIX,
+  timeout: 3000,
+  credentials: 'same-origin',
+  headers: {
+    Accept: 'application/json',
+  }
+});
 
-interface Response {
-  code: number,
-  data: any,
-  success: boolean,
-  msg?: string,
-  message?: string,
-}
-
-// 获取响应，通过 catch 语句显示错误内容
-export function request(
-  method: Method,
-  url: string,
-  params?: {[key: string]: any},
-  opts?: {[key: string]: any},
-){
-  return new Promise(async (resolve) => {
-    const res = await axios.request({
-      method,
-      url: URL_PREFIX + url,
-      params: ['get', 'delete'].indexOf(method) !== -1 ? params || {} : {  },
-      data: ['post', 'put'].indexOf(method) !== -1 ? params : undefined,
-      timeout: 10000,
-      ...(opts || {}),
-    }).catch((err) => {
-      resolve();
-    });
-
-    if ( !res ) return resolve();
-
-    resolve(res ? {
-      ...res,
-      origin: {
-        method,
-        url,
-        params,
-      }
-    } : res);
-  });
-}
-
-// get 请求，通过 axios.request 发送实际请求
+/**
+ * 处理 get 请求
+ * @param url 
+ * @param params 
+ * @param opts 
+ */
 export async function get(
   url: string,
-  params?: {[key: string]: any},
-  opts?: {[key: string]: any},
+  params?: object,
+  opts?: RequestOptionsInit,
 ){
-  if (opts && opts.enableCache){
-    const cache = getCache(url + JSON.stringify(params) + JSON.stringify(opts));
-    if (cache) return cache;
-  }
-
-  const res = await request('get', url, params, opts);
-
-  if (opts && opts.enableCache){
-    setCache(url + JSON.stringify(params) + JSON.stringify(opts), res);
-  };
-
+  const res = await request.get(url, { 
+    ...opts, 
+    params 
+  });
   return res;
-}
+};
 
-// post 请求
+/**
+ * 处理 post 请求
+ * @param url 
+ * @param params 
+ * @param opts 
+ */
 export async function post(
   url: string,
-  params?: {[key: string]: any},
-  opts?: {[key: string]: any},
+  data?: any,
+  opts?: RequestOptionsInit,
 ){
-  const res = await request('post', url, params, opts);
+  const res = await request.post(url, { ...opts, data });
   return res;
-}
+};
 
-// delete 请求
+/**
+ * 处理 put 请求
+ * @param url 
+ * @param params 
+ * @param opts 
+ */
+export async function put(
+  url: string,
+  data?: any,
+  opts?: RequestOptionsInit,
+){
+  const res = await request.put(url, { ...opts, data });
+  return res;
+};
+
+/**
+ * 处理 delete 请求
+ * @param url 
+ * @param params 
+ * @param opts 
+ */
 export async function del(
   url: string,
-  params?: {[key: string]: any},
-  opts?: {[key: string]: any},
+  params?: object,
+  opts?: RequestOptionsInit,
 ){
-  const res = await request('delete', url, params, opts);
+  const res = await request.delete(url, { ...opts, params });
   return res;
-}
+};
 
-// 使用拦截器处理状态码及 code 值，在 axios - then/catch 回调前执行
-axios.interceptors.response.use((res) => {
-  // const data: Response = res.data;
-  const { data, status, statusText, request: req, config } = res;
-  const disableErrorMessage = config && 'disableErrorMessage' in config ? config.disableErrorMessage : false;
-  const { responseURL: url } = req;
+/**
+ * 使用拦截器处理错误
+ */
+request.interceptors.response.use((response) => {
+  const codeMaps: { [key: number]: string } = {
+    200: '服务器成功返回请求的数据。',
+    201: '新建或修改数据成功。',
+    202: '一个请求已经进入后台排队（异步任务）。',
+    204: '删除数据成功。',
+    400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
+    401: '用户没有权限（令牌、用户名、密码错误）。',
+    403: '用户得到授权，但是访问是被禁止的。',
+    404: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
+    406: '请求的格式不可得。',
+    410: '请求的资源被永久删除，且不会再得到的。',
+    422: '当创建一个对象时，发生一个验证错误。',
+    500: '服务器发生错误，请检查服务器。',
+    502: '网关错误。',
+    503: '服务不可用，服务器暂时过载或维护。',
+    504: '网关超时。',
+  };
 
-  // http 状态码
-  if ( status !== 200 ) {
-    return Promise.reject({
-      code: status,
-      messsage: statusText,
-      url,
-    });
-  }
-
-  const { code, success, msg } = data;
-
-  // eslint-disable-next-line
-  if ( code == 402 ){
-    const { location } = window;
-    if ( !location.hash.match(/^#\/login/) ) location.hash = '/login';
-    return;
-  }
-
-  // 响应 code 值
-  // if ( !success && !disableErrorMessage ) {
-  //   return Promise.reject({
-  //     code,
-  //     message: msg || data.message || data.errorMessage || '出错',
-  //     errorMessage: data.errorMessage,
-  //     url,
-  //   });
-  // }
-
-  return data;
-}, err => Promise.reject(err));
+  switch(response.status){
+    case 402:
+      router.push('/login');
+      break;
+    case 401:
+    case 403:
+      router.push('/403');
+      break;
+    case 404:
+      if (!IS_LOCAL) router.push('/404');
+      break;
+    case 500:
+      router.push('/500');
+      break;
+    default:
+      message.error(codeMaps[response.status]);
+  };
+  
+  return response;
+});
