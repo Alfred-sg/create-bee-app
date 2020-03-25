@@ -4,11 +4,15 @@ import styles from './index.scss';
 /**
  * 尾
  */
-export default () => {
+export default ({
+  className
+}: {
+  className?: string,
+}) => {
   return (
-    <div className={styles.footer}>
+    <div className={`${styles.footer} ${className || ''}`}>
       <div className={styles.copyright}>
-        Copyright 2020
+        ©2020
       </div>
     </div>
   );

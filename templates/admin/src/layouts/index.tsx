@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import zh_CN from 'antd/es/locale-provider/zh_CN';
-import { useApp, Provider } from '@/hooks/global/app';
-import { Header, Menu, Breadcrumbs, Footer, ErrorBoundary, EnvAlert } from '@/components/Layouts';
-import { TITLE } from '@/config';
+import { IconContext } from 'react-icons';
+import { useApp, AppContext } from '@/hooks/global/app';
+import { Header, Sider, Breadcrumbs, Footer, ErrorBoundary, EnvAlert } from '@/components/Layouts';
 import styles from './index.scss';
+
+const { Content } = Layout;
 
 const BasicLayout: React.FC<{
   location: any;
   route: any;
 }> = props => {
   const { location: { pathname }, route } = props;
-  const [menuCollapsed, setMenuCollapsed] = useState(false);
-  const app = useApp(route.routes);
+  const [collapsed, setCollapsed] = useState(false);
+  const app = useApp(route.routes, {
+    pathname
+  });
 
   return (
     <ErrorBoundary>
@@ -20,46 +24,36 @@ const BasicLayout: React.FC<{
         locale={zh_CN}
       // getPopupContainer={triggerNode => triggerNode}
       >
-        <Provider value={app}>
-          {app.routes.filter(item => !item.menu && item.path)
-            .map(item => item.path).includes(pathname) ? (
-              props.children
-            ) : (
-              <div className={styles.container}>
-                {!menuCollapsed && (
-                  <div className={styles.aside}>
-                    <div className={styles.logo}>
-                      {TITLE}
-                    </div>
+        <IconContext.Provider value={{ className: 'react-icons' }}>
+          <AppContext.Provider value={app}>
+            {app.routes.filter(item => !item.menu && item.path)
+              .map(item => item.path).includes(pathname) ? (
+                props.children
+              ) : (
+                <Layout>
+                  <Sider collapsed={collapsed} onCollapse={setCollapsed} />
 
-                    <div className={styles.menu}>
-                      <Menu collapsed={menuCollapsed} {...props} />
-                    </div>
-                  </div>
-                )}
-                <div className={styles.main} style={{ left: menuCollapsed ? 0 : 256 }}>
-                  <div className={styles.header}>
-                    <Header onMenuCollapse={setMenuCollapsed} collapsed={menuCollapsed} />
-                  </div>
-
-                  <div className={styles.content}>
+                  <Layout>
+                    <Header />
+                    
                     <EnvAlert />
 
-                    <div className={styles.bread}>
-                      <Breadcrumbs />
-                    </div>
+                    <Breadcrumbs className={styles.breadcrumbs} />
 
-                    <div className={styles.maincontent}>
-                      {props.children}
-                    </div>
+                    <Content className={styles.content}>
 
-                    <Footer />
-                  </div>
-                </div>
-              </div>
-            )
-          }
-        </Provider>
+                      <div className={styles.maincontent}>
+                        {props.children}
+                      </div>
+                    </Content>
+                    
+                    <Footer className={styles.footer} />
+                  </Layout>
+                </Layout>
+              )
+            }
+          </AppContext.Provider>
+        </IconContext.Provider>
       </ConfigProvider>
     </ErrorBoundary>
   );

@@ -6,6 +6,12 @@ body {
   margin: 0;
 }
 
+/* react-icons 样式 */
+.react-icons {
+  vertical-align: text-bottom;
+  font-size: 18px;
+}
+
 /* antd 样式重置 */
 .ant-menu-inline,
 .ant-menu-vertical,

@@ -18,7 +18,12 @@ export const URL_PREFIX = !IS_LOCAL ? '/api' : '';
 
 /** 应用名称 */
 export const TITLE = '应用名称';
+export const SIDER_THEME = 'dark';
+export const LOGO_URL = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
+export const BREADCRUMBS_MODE = 'simple';
 
 /** 默认用户 */
-export const DEFAULT_USER = {} as UserInfo;
+export const DEFAULT_USER = {
+  name: '测试用户',
+} as UserInfo;
 

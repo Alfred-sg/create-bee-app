@@ -1,14 +1,14 @@
 
 .normal {
   font-family: Georgia, sans-serif;
-  margin-top: 4em;
+  margin-top: 20px;
   text-align: center;
 }
 
 .welcome {
-  height: 512px;
+  height: 200px;
   background: url(../assets/yay.jpg) no-repeat center 0;
-  background-size: 512px 512px;
+  background-size: 200px 200px;
 }
 
 .list {

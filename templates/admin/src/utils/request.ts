@@ -1,6 +1,7 @@
 import { router } from 'umi';
 import { message } from 'antd';
 import { extend, RequestOptionsInit } from 'umi-request';
+import { Response } from '@/types/global';
 import { URL_PREFIX, IS_LOCAL } from '../config';
 
 const request = extend({
@@ -22,7 +23,7 @@ export async function get(
   url: string,
   params?: object,
   opts?: RequestOptionsInit,
-){
+): Promise<Response> {
   const res = await request.get(url, { 
     ...opts, 
     params 
@@ -40,7 +41,7 @@ export async function post(
   url: string,
   data?: any,
   opts?: RequestOptionsInit,
-){
+): Promise<Response> {
   const res = await request.post(url, { ...opts, data });
   return res;
 };
@@ -55,7 +56,7 @@ export async function put(
   url: string,
   data?: any,
   opts?: RequestOptionsInit,
-){
+): Promise<Response> {
   const res = await request.put(url, { ...opts, data });
   return res;
 };
@@ -70,7 +71,7 @@ export async function del(
   url: string,
   params?: object,
   opts?: RequestOptionsInit,
-){
+): Promise<Response> {
   const res = await request.delete(url, { ...opts, params });
   return res;
 };
