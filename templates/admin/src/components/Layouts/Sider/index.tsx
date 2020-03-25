@@ -19,6 +19,7 @@ export default (props: {
       breakpoint="lg" 
       className={styles.sider}
       collapsible 
+      trigger={null}
       collapsed={collapsed} 
       onCollapse={onCollapse}
       theme={theme}

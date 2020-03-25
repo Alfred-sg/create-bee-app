@@ -6,22 +6,27 @@
 * 组件库使用 [antd 4](https://ant.design/index-cn)。
 * 图标使用 [react-icons](https://react-icons.netlify.com/#/icons/ai)。
 * 请求库使用 [umi-request](https://github.com/umijs/umi-request)。
+* 调试使用 [vconsole](https://github.com/Tencent/vConsole)，如 mac 电脑的钉钉环境。
 
 ### 配置项
+
+package.json#appMetaData 配置。
 
 #### 展示配置项
 
 ```yaml
-TITLE: 应用名称
-SIDER_THEME: dark # 侧边栏风格，dark、light
-LOGO_URL: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg # logo 图标地址
-BREADCRUMBS_MODE: simple # 面包屑风格，simple、complex
+title: 应用名称
+logoUrl: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg # logo 图标地址
+companyName: 公司名称
+siderTheme: dark # 侧边栏风格，dark、light
+breadcrumbsMode: simple # 面包屑风格，simple、complex
 ```
 
 #### 功能配置项
 
 ```yaml
-ENABLE_LOGIN: true # 是否需要登录
+enableLogin: true # 是否包含登录功能
+enableDebug: false # 启动调试，开发环境或线上环境带 debug=true 查询参数
 ```
 
 ### 接口约定

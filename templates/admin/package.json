@@ -12,16 +12,20 @@
     "antd": "^4.0.4",
     "chaos-hooks": "^0.3.0",
     "classnames": "^2.2.6",
+    "eruda": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-icons": "^3.9.0",
+    "react-responsive": "^8.0.3",
     "sass-loader": "^8.0.2",
-    "umi-request": "^1.2.19"
+    "umi-request": "^1.2.19",
+    "vconsole": "^3.3.4"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
+    "@types/react-responsive": "^8.0.2",
     "@types/react-test-renderer": "^16.0.3",
     "babel-eslint": "^9.0.0",
     "eslint": "^5.4.0",
@@ -51,5 +55,14 @@
   },
   "engines": {
     "node": ">=8.0.0"
+  },
+  "appMetaData": {
+    "title": "小青蛙",
+    "logoUrl": "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
+    "companyName": "小青蛙科技有效公司",
+    "siderTheme": "dark",
+    "breadcrumbsMode": "simple",
+    "enableLogin": true,
+    "enableDebug": false
   }
 }

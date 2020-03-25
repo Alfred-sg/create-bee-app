@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ConfigProvider, Layout } from 'antd';
+import { ConfigProvider, Layout, Drawer } from 'antd';
 import zh_CN from 'antd/es/locale-provider/zh_CN';
 import { IconContext } from 'react-icons';
+import { useMediaQuery } from 'react-responsive'
 import { useApp, AppContext } from '@/hooks/global/app';
 import { Header, Sider, Breadcrumbs, Footer, ErrorBoundary, EnvAlert } from '@/components/Layouts';
 import styles from './index.scss';
@@ -17,6 +18,9 @@ const BasicLayout: React.FC<{
   const app = useApp(route.routes, {
     pathname
   });
+  const isSmall = useMediaQuery({
+    query: '(max-width: 768px)'
+  });
 
   return (
     <ErrorBoundary>
@@ -24,27 +28,34 @@ const BasicLayout: React.FC<{
         locale={zh_CN}
       // getPopupContainer={triggerNode => triggerNode}
       >
-        <IconContext.Provider value={{ className: 'react-icons' }}>
+        <IconContext.Provider value={{ className: styles.react_icons }}>
           <AppContext.Provider value={app}>
             {app.routes.filter(item => !item.menu && item.path)
               .map(item => item.path).includes(pathname) ? (
                 props.children
               ) : (
                 <Layout>
-                  <Sider collapsed={collapsed} onCollapse={setCollapsed} />
+                  {isSmall ? (
+                    <Drawer
+                      placement="left"
+                      closable={true}
+                      onClose={() => setCollapsed(!collapsed)}
+                      visible={!collapsed}
+                      bodyStyle={{padding: 0}}
+                    >
+                      <Sider collapsed={false} onCollapse={() => {}} />
+                    </Drawer>
+                  ) : <Sider collapsed={collapsed} onCollapse={setCollapsed} />}
 
                   <Layout>
-                    <Header />
+                    <Header collapsed={collapsed} onCollapse={setCollapsed} />
                     
                     <EnvAlert />
 
-                    <Breadcrumbs className={styles.breadcrumbs} />
+                    <Breadcrumbs />
 
                     <Content className={styles.content}>
-
-                      <div className={styles.maincontent}>
-                        {props.children}
-                      </div>
+                      {props.children}
                     </Content>
                     
                     <Footer className={styles.footer} />

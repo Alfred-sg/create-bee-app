@@ -1,4 +1,5 @@
 import { UserInfo } from '@/types/global';
+import { appMetaData } from '../package.json';
 
 /** 环境 */
 export const DEPLOY_ENV = process.env.DEPLOY_ENV;
@@ -17,13 +18,17 @@ export const GIT_COMMIT_MESSAGE = process.env.GIT_COMMIT_MESSAGE;
 export const URL_PREFIX = !IS_LOCAL ? '/api' : '';
 
 /** 应用名称 */
-export const TITLE = '应用名称';
-export const SIDER_THEME = 'dark';
-export const LOGO_URL = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
-export const BREADCRUMBS_MODE = 'simple';
+export const TITLE = appMetaData.title;
+export const COMPANY_NAME = appMetaData.companyName;
+export const SIDER_THEME = appMetaData.siderTheme;
+export const LOGO_URL = appMetaData.logoUrl;
+export const BREADCRUMBS_MODE = appMetaData.breadcrumbsMode;
+
+export const ENABLE_LOGIN = appMetaData.enableLogin;
+export const ENABLE_DEBUG = appMetaData.enableDebug;
 
 /** 默认用户 */
 export const DEFAULT_USER = {
-  name: '测试用户',
+  name: '大青蛙',
 } as UserInfo;
 

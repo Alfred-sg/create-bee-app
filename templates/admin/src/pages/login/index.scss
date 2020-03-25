@@ -1,0 +1,48 @@
+.normal {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+  background: #f0f2f5
+}
+
+.logo {
+  padding: 100px 0 80px;
+  line-height: 44px;
+  text-align: center;
+}
+
+.logo_img {
+  display: inline-block;
+  height: 44px;
+  width: 44px;
+}
+
+.logo_img img {
+  height: 44px;
+}
+
+.title {
+  line-height: 44px;
+  color: rgba(0,0,0,.85);
+  font-weight: 600;
+  font-size: 33px;
+  vertical-align: top;
+  margin-left: 16px;
+}
+
+.login_form {
+  width: 368px;
+  margin: 0 auto;
+}
+
+.login_button {
+  width: 100%;
+}
+
+@media screen and (max-width: 576px) {
+  .login-form{
+    width: 95%;
+    margin: 0 auto;
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { COMPANY_NAME } from '@/config';
 import styles from './index.scss';
 
 /**
@@ -12,7 +13,7 @@ export default ({
   return (
     <div className={`${styles.footer} ${className || ''}`}>
       <div className={styles.copyright}>
-        ©2020
+        Copyright ©2020 {COMPANY_NAME}
       </div>
     </div>
   );

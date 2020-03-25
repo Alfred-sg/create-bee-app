@@ -1,15 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Avatar, Badge } from 'antd';
-import * as Icons from 'react-icons/ai';
+import { Avatar } from 'antd';
+import { IconContext } from 'react-icons';
+import { AiOutlineLogout, AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 import router from 'umi/router';
+import { ENABLE_LOGIN } from '@/config';
 import { useAppContext } from '@/hooks/global/app';
 
 import styles from './index.scss';
 
 export default (props: {
-  className?: string,
+  collapsed: boolean;
+  onCollapse: (collapsed: boolean) => void;
+  className?: string;
 }) => {
-  const { className } = props;
+  const { collapsed, onCollapse, className } = props;
   const [visible, setVisible] = useState(false);
   const userPanelRef = useRef(null);
   const appContext = useAppContext();
@@ -43,6 +47,12 @@ export default (props: {
 
   return (
     <div className={`${styles.header} ${className || ''}`}>
+      <span onClick={() => onCollapse(!collapsed)}>
+        <IconContext.Provider value={{ className: styles.menu_collapse_icon }}>
+          {collapsed ? <AiOutlineMenuUnfold /> : <AiOutlineMenuFold />}
+        </IconContext.Provider>
+      </span>
+
       <span className={styles.pannel}>
         <span className={styles.avatar} onClick={showUserPanel}>
           <Avatar
@@ -56,10 +66,10 @@ export default (props: {
         </span>
       </span>
 
-      {visible && (
+      {ENABLE_LOGIN && visible && (
         <div className={styles.user_panel} ref={userPanelRef}>
           <div className={styles.loginout} onClick={handleLoginOut}>
-            <Icons.AiOutlineLogout /> <span>退出登录</span>
+            <AiOutlineLogout /> <span>退出登录</span>
           </div>
         </div>
       )}

@@ -1,5 +1,6 @@
 import { IConfig } from 'umi-types';
 import execa from 'execa';
+import { appMetaData } from './package.json';
 
 const { NODE_ENV, DEPLOY_ENV } = process.env;
 
@@ -82,8 +83,9 @@ const config: IConfig =  {
         { path: '/403', component: '../pages/403' },
         { path: '/404', component: '../pages/404' },
         { path: '/500', component: '../pages/500' },
+        appMetaData.enableLogin ? { path: '/login', component: '../pages/login' } : undefined,
         { path: '/', component: '../pages/index', menu: true, title: '首页' }
-      ]
+      ].filter(route => !!route)
     }
   ],
 }
