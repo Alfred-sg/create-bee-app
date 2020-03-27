@@ -1,5 +1,20 @@
 {
+  "name": "create-chiron-app",
+  "version": "0.1.0",
+  "description": "create simple app",
+  "authors": {
+    "name": "alfred",
+    "email": "sc941203@foxmail.com"
+  },
+  "bin": {
+    "create-chiron": "bin/index.js"
+  },
+  "repository": "https://github.com/Alfred-sg/create-chiron-app",
   "dependencies": {
-    "inquirer": "^7.1.0"
-  }
+    "chalk": "^3.0.0",
+    "commander": "^5.0.0",
+    "inquirer": "^7.1.0",
+    "shelljs": "^0.8.3"
+  },
+  "license": "MIT"
 }

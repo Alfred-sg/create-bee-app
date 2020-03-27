@@ -1,0 +1,9 @@
+{
+  "isAdmin": false,
+  "title": "小青蛙",
+  "companyName": "小青蛙科技有效公司",
+  "siderTheme": "dark",
+  "breadcrumbsMode": "simple",
+  "enableLogin": true,
+  "enableDebug": false
+}
