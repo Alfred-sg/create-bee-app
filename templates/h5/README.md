@@ -1,4 +1,4 @@
-## admin 桌面应用模板
+## admin 移动应用模板
 
 ### 快速开始
 
@@ -7,7 +7,7 @@ npm install create-chiron-app -g
 create-chiron myproject
 ```
 
-选择所要创建的应用类型、界面展示风格。项目中修改 publicPath 等。
+选择所要创建的应用类型。项目中修改 publicPath 等。
 
 ### 依赖
 
@@ -21,20 +21,9 @@ create-chiron myproject
 
 meta.json 配置。
 
-#### 展示配置项
-
-```yaml
-title: 应用名称
-companyName: 公司名称
-siderTheme: dark # 侧边栏风格，dark、light
-breadcrumbsMode: simple # 面包屑风格，simple、complex
-```
-
 #### 功能配置项
 
 ```yaml
-isAdmin: true # 是否后台管理系统
-enableLogin: true # 是否包含登录功能
 enableDebug: false # 启动调试，开发环境或线上环境带 debug=true 查询参数
 ```
 

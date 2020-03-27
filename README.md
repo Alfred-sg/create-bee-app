@@ -1,10 +1,20 @@
-## admin 桌面应用模板
+## create-chiron-app
+
+一个脚手架。
 
 ### 快速开始
 
 ```shell
 npm install create-chiron-app -g
 create-chiron myproject
+# ? 请选择应用类型 pc 桌面应用
+# ? 是否后台管理系统 Yes
+# ? 应用名称 小青蛙
+# ? 公司名称 小青蛙科技有限公司
+# ? 侧边栏风格 dark
+# ? 面包屑风格 complex
+# ? 是否需要登录 Yes
+# ? 是否启用调试模式 No
 ```
 
 选择所要创建的应用类型、界面展示风格。项目中修改 publicPath 等。
