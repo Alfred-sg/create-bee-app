@@ -85,7 +85,7 @@ export const getMatchedRoutes = (routes: Route[], pathname: string, result?: Rou
 
   routes.forEach(childRoute => {
     if (childRoute.path && match(pathname, childRoute.path)) {
-      if (!temp || temp.path.split('/').length < childRoute.path.split('/').length) {
+      if (!temp || temp.path.length < childRoute.path.length) {
         temp = childRoute;
       }
     };

@@ -1,4 +1,4 @@
-import meta from './meta.json';
+const meta = require('./meta.json');
 
 const envTexts = {
   dev: '测试环境',
