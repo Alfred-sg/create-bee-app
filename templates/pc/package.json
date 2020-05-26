@@ -10,7 +10,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.0.3",
     "antd": "^4.0.4",
-    "chaos-hooks": "^0.3.0",
+    "chaos-hooks": "^0.5.0",
     "classnames": "^2.2.6",
     "dingtalk-jsapi": "^2.10.3",
     "eruda": "^2.2.1",

@@ -9,7 +9,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "chaos-hooks": "^0.3.0",
+    "chaos-hooks": "^0.5.0",
     "postcss-px-to-viewport": "^1.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
