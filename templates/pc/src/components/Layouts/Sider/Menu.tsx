@@ -53,7 +53,7 @@ export default withRouter((props: any) => {
         title={menu.icon ? (
           <Fragment>
             {rendetIcon(menu, level)}
-            {menu.title}
+            <span>{menu.title}</span>
           </Fragment>
         ) : menu.title}
       >
